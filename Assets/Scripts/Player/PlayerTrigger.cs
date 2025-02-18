@@ -16,4 +16,12 @@ public class PlayerTrigger : MonoBehaviour
         }
 
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log(collision.gameObject.name);
+            StackController.Instance.SpawnStack();
+        }
+    }
 }

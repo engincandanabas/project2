@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 613738330201390380}
   - component: {fileID: 613738330201390371}
   - component: {fileID: 613738330201390370}
+  - component: {fileID: -8365769079935715284}
   m_Layer: 0
   m_Name: Stack
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8365769079935715284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613738330201390368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1e8647060c1ca4194e7a4238a6eb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveOffset: 2
+  moveSpeed: 1.5
+  ease: 1
+  tolerance: 0.1
+  fallForce: 5

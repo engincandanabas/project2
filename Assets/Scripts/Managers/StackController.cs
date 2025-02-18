@@ -6,22 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class StackController : MonoBehaviour
 {
+    public static StackController Instance { get; private set; }
+
     [Header("Stack Attributes")]
     [SerializeField] private GameObject stackPrefab;
     [SerializeField] private List<Material> materials;
     [SerializeField] private GameObject stackParent;
 
-    [Header("Move Attributes")]
-    [SerializeField] private float moveOffset;
-    [SerializeField] private float moveSpeed;
-
+   
     private float stackLength = 2.7f;
     private List<GameObject> stacks = new List<GameObject>();
 
+    private bool readyForSpawn = true;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         AssignChilds();
-        SpawnStack();
+        //SpawnStack();
     }
 
     private void AssignChilds()
@@ -32,17 +37,28 @@ public class StackController : MonoBehaviour
         }
     }
     
-    private void SpawnStack()
+    public void SpawnStack()
     {
-        var zPos = stacks.Count * stackLength;
-        GameObject stack=Instantiate(stackPrefab);
-        stack.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Count)];  
-        stack.transform.SetParent(stackParent.transform);
-        stack.transform.localPosition = new Vector3(0, -0.5007f, zPos);
+        if (readyForSpawn)
+        {
+            readyForSpawn=false;
 
-        stack.transform.localScale = stacks[stacks.Count - 1].transform.localScale;
-        stacks.Add(stack);
+            var zPos = stacks.Count * stackLength;
+            GameObject stack = Instantiate(stackPrefab);
+            stack.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Count)];
+            stack.transform.SetParent(stackParent.transform);
+            stack.transform.localPosition = new Vector3(0, -0.5007f, zPos);
 
+            stack.transform.localScale = stacks[stacks.Count - 1].transform.localScale;
+            stacks.Add(stack);
+
+            stack.GetComponent<Stack>().StartMove();
+        }
+    }
+
+    public void ResetState()
+    {
+        readyForSpawn = true;
     }
 }
 

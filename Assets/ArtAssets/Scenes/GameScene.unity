@@ -1200,7 +1200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 196466630}
   m_Layer: 0
-  m_Name: Stacks (1)
+  m_Name: StacksParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3350,7 +3350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5062883109654775314}
-  moveSpeed: 0.5
+  moveSpeed: 1
 --- !u!65 &604125044
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3600,7 +3600,7 @@ GameObject:
   - component: {fileID: 626986782}
   m_Layer: 0
   m_Name: Stack (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9332,7 +9332,7 @@ GameObject:
   - component: {fileID: 1596089526}
   m_Layer: 0
   m_Name: Stack
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10779,8 +10779,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 0304769e0c8dd25459a3cf2f6b542a59, type: 2}
   - {fileID: 2100000, guid: d0ca2cd4145ff9c4282021e14702f4af, type: 2}
   stackParent: {fileID: 196466629}
-  moveOffset: 5
-  moveSpeed: 5
 --- !u!1 &1868045906
 GameObject:
   m_ObjectHideFlags: 0
