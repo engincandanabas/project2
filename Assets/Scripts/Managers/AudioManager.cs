@@ -13,15 +13,8 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+
         AudioSourceAdd();
     }
     private void OnEnable()
@@ -31,8 +24,8 @@ public class AudioManager : MonoBehaviour
     }
     private void OnDisable()
     {
-        StackController.OnStackCombo += IncreasePitch;
-        StackController.OnStackComboReset += ResetPitch;
+        StackController.OnStackCombo -= IncreasePitch;
+        StackController.OnStackComboReset -= ResetPitch;
     }
     public void AudioSourceAdd()
     {
@@ -67,8 +60,8 @@ public class AudioManager : MonoBehaviour
     {
         if (Array.Exists(sounds, element => element.name == "Place"))
         {
-            var sound = Array.Find(sounds, sound => sound.name == "Place");
-            sound.source.pitch=sound.pitch;
+            Sound sound = Array.Find(sounds, sound => sound.name == "Place");
+            sound.source.pitch = sound.pitch;
         }
     }
 }

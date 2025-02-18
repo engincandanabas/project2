@@ -1,18 +1,43 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject winView;
+    [SerializeField] private GameObject failView;
+    [SerializeField] private Button failTryButton;
+    [SerializeField] private Button winTryButton;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        failTryButton.onClick.AddListener(() => RestartGame());
+        winTryButton.onClick.AddListener(() => RestartGame());
+    }
+    private void OnEnable()
+    {
+        GameManager.OnGameWin += EnableWinView;
+        GameManager.OnGameFail += EnableFailView;
+    }
+    private void OnDisable()
+    {
+        GameManager.OnGameWin -= EnableWinView;
+        GameManager.OnGameFail -= EnableFailView;
+    }
+    private void EnableWinView()
+    {
+        winView.SetActive(true);
+    }
+    private void EnableFailView()
+    {
+        failView.SetActive(true);
+    }
+    private void RestartGame()
+    {
+        DOTween.KillAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
