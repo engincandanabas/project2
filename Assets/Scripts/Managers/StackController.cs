@@ -21,6 +21,10 @@ public class StackController : MonoBehaviour
     public delegate void StackSpawn(float x);
     public static event StackSpawn OnStackSpawned;
 
+    public delegate void StackCombo();
+    public static event StackCombo OnStackCombo;
+    public static event StackCombo OnStackComboReset;
+
     private void Awake()
     {
         Instance = this;
@@ -60,9 +64,17 @@ public class StackController : MonoBehaviour
 
     }
 
-    public void TriggerEvent(float x)
+    public void TriggerSpawnEvent(float x)
     {
         OnStackSpawned?.Invoke(x);
+    }
+    public void TriggerComboEvent()
+    {
+        OnStackCombo?.Invoke();
+    }
+    public void TriggerResetEvent()
+    {
+        OnStackComboReset?.Invoke();
     }
 }
 

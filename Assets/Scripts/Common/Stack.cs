@@ -57,6 +57,8 @@ public class Stack : MonoBehaviour
         {
             transform.localPosition = new Vector3(previousStack.localPosition.x, transform.localPosition.y, transform.localPosition.z);
             StackController.Instance.SpawnStack();
+            StackController.Instance.TriggerComboEvent();
+            AudioManager.Instance.PlaySound("Place");
             return;
         }
 
@@ -65,6 +67,9 @@ public class Stack : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        AudioManager.Instance.PlaySound("Place");
+        StackController.Instance.TriggerResetEvent();
 
         float newSize = transform.localScale.x - Mathf.Abs(delta);
         float fallingSize = transform.localScale.x - newSize;
@@ -92,6 +97,6 @@ public class Stack : MonoBehaviour
 
         StackController.Instance.SpawnStack();
 
-        StackController.Instance.TriggerEvent(transform.localPosition.x);
+        StackController.Instance.TriggerSpawnEvent(transform.localPosition.x);
     }
 }

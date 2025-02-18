@@ -22,16 +22,22 @@ public class CameraController : MonoBehaviour
     private void OnEnable()
     {
         GameManager.OnGameWin += AnimateCamera;
+        GameManager.OnGameFail += DisableFollow;
     }
     private void OnDisable()
     {
         GameManager.OnGameWin -= AnimateCamera;
+        GameManager.OnGameFail -= DisableFollow;
     }
 
     private void AnimateCamera()
     {
         this.GetComponent<CinemachineVirtualCamera>().enabled = false;
         animate = true;
+    }
+    private void DisableFollow()
+    {
+        this.GetComponent<CinemachineVirtualCamera>().enabled = false;
     }
 }
 
