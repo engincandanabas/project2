@@ -7,7 +7,7 @@ public class Stack : MonoBehaviour
 {
     [Header("Move Attributes")]
     [SerializeField] private float moveOffset;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed=1.5f;
     [SerializeField] private Ease ease;
     [SerializeField] private float tolerance = 0.1f;
     [SerializeField] private float fallForce = 5f; // Force applied to falling piece
@@ -16,10 +16,11 @@ public class Stack : MonoBehaviour
     private Vector3 startPos;
     private bool hasStopped = false;
 
+
     public void StartMove()
     {
         startPos = transform.localPosition;
-        moveOffset = transform.localScale.x * 1.2f;
+        moveOffset = 1.5f*transform.localScale.x;
         isLeft = (Random.Range(0, 2) == 0) ? true : false;
 
         transform.localPosition += new Vector3((isLeft) ? -moveOffset : moveOffset, 0, 0);
@@ -28,8 +29,8 @@ public class Stack : MonoBehaviour
 
     private void StartAnimation()
     {
-        var target = new Vector3((isLeft) ? moveOffset * 2 : -moveOffset * 2, 0, 0);
-        transform.DOLocalMove(transform.localPosition + target, moveSpeed).SetEase(ease).OnComplete(() =>
+        var target = new Vector3((isLeft) ? moveOffset  : -moveOffset , 0, 0);
+        transform.DOLocalMove(startPos + target, moveSpeed).SetEase(ease).OnComplete(() =>
         {
             isLeft = !isLeft;
             StartAnimation();
@@ -55,8 +56,7 @@ public class Stack : MonoBehaviour
         if (Mathf.Abs(delta) <= tolerance)
         {
             transform.localPosition = new Vector3(previousStack.localPosition.x, transform.localPosition.y, transform.localPosition.z);
-            StackController.Instance.ResetState();
-            //StackController.Instance.SpawnStack();
+            StackController.Instance.SpawnStack();
             return;
         }
 
@@ -85,8 +85,13 @@ public class Stack : MonoBehaviour
 
         transform.localPosition -= new Vector3((delta > 0 ? fallingSize / 2 : -fallingSize / 2), 0, 0);
 
-        Destroy(fallingCube, 2);
+        this.GetComponent<BoxCollider>().enabled = true;
 
-        StackController.Instance.ResetState();
+
+        Destroy(fallingCube, 1);
+
+        StackController.Instance.SpawnStack();
+
+        StackController.Instance.TriggerEvent(transform.localPosition.x);
     }
 }

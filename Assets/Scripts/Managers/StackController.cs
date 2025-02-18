@@ -13,11 +13,13 @@ public class StackController : MonoBehaviour
     [SerializeField] private List<Material> materials;
     [SerializeField] private GameObject stackParent;
 
-   
+
     private float stackLength = 2.7f;
     private List<GameObject> stacks = new List<GameObject>();
+    private int spawnCount = 0;
 
-    private bool readyForSpawn = true;
+    public delegate void StackSpawn(float x);
+    public static event StackSpawn OnStackSpawned;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class StackController : MonoBehaviour
     private void Start()
     {
         AssignChilds();
-        //SpawnStack();
+        SpawnStack();
     }
 
     private void AssignChilds()
@@ -36,29 +38,31 @@ public class StackController : MonoBehaviour
             stacks.Add(stackParent.transform.GetChild(i).gameObject);
         }
     }
-    
+
     public void SpawnStack()
     {
-        if (readyForSpawn)
-        {
-            readyForSpawn=false;
+        if (spawnCount > 38) return;
 
-            var zPos = stacks.Count * stackLength;
-            GameObject stack = Instantiate(stackPrefab);
-            stack.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Count)];
-            stack.transform.SetParent(stackParent.transform);
+        spawnCount++;
+        var zPos = stacks.Count * stackLength;
+        GameObject stack = Instantiate(stackPrefab);
+        stack.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Count)];
+        stack.transform.SetParent(stackParent.transform);
+        if (stacks.Count > 0)
+            stack.transform.localPosition = new Vector3(stacks[stacks.Count - 1].transform.localPosition.x, -0.5007f, zPos);
+        else
             stack.transform.localPosition = new Vector3(0, -0.5007f, zPos);
 
-            stack.transform.localScale = stacks[stacks.Count - 1].transform.localScale;
-            stacks.Add(stack);
+        stack.transform.localScale = stacks[stacks.Count - 1].transform.localScale;
+        stacks.Add(stack);
 
-            stack.GetComponent<Stack>().StartMove();
-        }
+        stack.GetComponent<Stack>().StartMove();
+
     }
 
-    public void ResetState()
+    public void TriggerEvent(float x)
     {
-        readyForSpawn = true;
+        OnStackSpawned?.Invoke(x);
     }
 }
 
