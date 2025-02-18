@@ -2044,6 +2044,7 @@ GameObject:
   m_Component:
   - component: {fileID: 382121205}
   - component: {fileID: 382121204}
+  - component: {fileID: 382121206}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -2096,15 +2097,28 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382121203}
-  m_LocalRotation: {x: 0.39758834, y: -0.14602566, z: 0.06425283, w: 0.90358824}
-  m_LocalPosition: {x: 1.14, y: 4.2, z: -1.42}
+  m_LocalRotation: {x: 0.4340362, y: -0.2502564, z: 0.12687993, w: 0.85608757}
+  m_LocalPosition: {x: 1.14, y: 5.36, z: -1.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1049493508}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 47.5, y: -18.36, z: 0}
+  m_LocalEulerAnglesHint: {x: 53.77, y: -32.59, z: 0}
+--- !u!114 &382121206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382121203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec40278c9c2e1a4ebc4073348c35a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5062883109654775313}
 --- !u!1 &386246262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,8 +4791,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889751898}
-  m_LocalRotation: {x: 0.39758834, y: -0.14602566, z: 0.06425283, w: 0.90358824}
-  m_LocalPosition: {x: 1.14, y: 4.2, z: -1.42}
+  m_LocalRotation: {x: 0.4340362, y: -0.2502564, z: 0.12687993, w: 0.85608757}
+  m_LocalPosition: {x: 1.14, y: 5.36, z: -1.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5832,7 +5846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 1.14, y: 4.2, z: -1.42}
+  m_FollowOffset: {x: 1.14, y: 5.36, z: -1.68}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -13524,7 +13538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8153186057199919623, guid: 50d59dd24e8b8264b890d8c1d9709931, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 110.7
+      value: 110.25
       objectReference: {fileID: 0}
     - target: {fileID: 8153186057199919623, guid: 50d59dd24e8b8264b890d8c1d9709931, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13556,6 +13570,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8822058165888743613, guid: 50d59dd24e8b8264b890d8c1d9709931, type: 3}
       propertyPath: m_Name
+      value: Finish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822058165888743613, guid: 50d59dd24e8b8264b890d8c1d9709931, type: 3}
+      propertyPath: m_TagString
       value: Finish
       objectReference: {fileID: 0}
     m_RemovedComponents: []

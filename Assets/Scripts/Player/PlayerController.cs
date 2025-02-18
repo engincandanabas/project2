@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,11 @@ public class PlayerController : MonoBehaviour
     }
     private void ChangeAnimation()
     {
-        animator.SetBool("dance", true);
+        
+        this.transform.DOMove(this.transform.position + transform.forward * 1, 1).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            animator.SetBool("dance", true);
+        });
+        
     }
 }

@@ -78,6 +78,7 @@ public class Stack : MonoBehaviour
         fallingCube.transform.localScale = new Vector3(fallingSize, transform.localScale.y, transform.localScale.z);
         fallingCube.transform.position = transform.position + new Vector3((delta > 0 ? fallingSize / 2 : -fallingSize / 2), 0, 0);
         fallingCube.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
+        fallingCube.GetComponent<BoxCollider>().isTrigger = true;
         Rigidbody rb = fallingCube.AddComponent<Rigidbody>();
 
         Vector3 forceDirection = new Vector3((delta > 0 ? 1 : -1), -2, 0).normalized; // Increase downward force
@@ -85,7 +86,6 @@ public class Stack : MonoBehaviour
 
         transform.localPosition -= new Vector3((delta > 0 ? fallingSize / 2 : -fallingSize / 2), 0, 0);
 
-        this.GetComponent<BoxCollider>().enabled = true;
 
 
         Destroy(fallingCube, 1);
